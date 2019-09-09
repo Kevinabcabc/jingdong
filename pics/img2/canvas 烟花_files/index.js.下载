@@ -1,0 +1,57 @@
+jQuery(document).ready(function(){
+    var cx = 0,cy = 0;
+    var colors = [
+        [{r:255,g:0,b:0}, {r:228,g:225,b:0}, {r:169,g:0,b:231}, {r:255,g:0,b:148}, {r:255,g:255,b:255}],
+        [{r:241,g:0,b:0}, {r:255,g:72,b:72}, {r:239,g:107,b:107}, {r:255,g:191,b:191}, {r:255,g:255,b:255}],
+        [{r:0,g:153,b:231}, {r:194,g:0,b:231}, {r:255,g:118,b:0}, {r:141,g:227,b:0}, {r:255,g:255,b:255}],
+        [{r:255,g:251,b:125}, {r:0,g:206,b:223}, {r:247,g:154,b:255}, {r:255,g:165,b:106}, {r:255,g:255,b:255}],
+        [{r:255,g:118,b:0}, {r:0,g:205,b:255}],
+        [{r:214,g:214,b:214}, {r:231,g:234,b:0}],
+        [{r:182,g:255,b:125}, {r:255,g:0,b:123}],
+        [{r:255,g:0,b:0}],
+        [{r:0,g:94,b:226}],
+        [{r:214,g:214,b:214}],
+        [{r:231,g:234,b:0}],
+        [{r:255,g:118,b:0}],
+        [{r:0,g:205,b:255}],
+        [{r:182,g:255,b:125}],
+        [{r:255,g:0,b:123}]
+    ];
+    var clickColor = [
+        [{r:255,g:0,b:0}],
+        [{r:0,g:94,b:226}],
+        [{r:214,g:214,b:214}],
+        [{r:0,g:168,b:0}],
+        [{r:231,g:234,b:0}],
+        [{r:255,g:118,b:0}],
+        [{r:0,g:205,b:255}],
+        [{r:182,g:255,b:125}],
+        [{r:255,g:0,b:123}]
+    ];
+    $('body').firemaks({
+		// color: 'random',//随机颜色
+		color: colors,//指定颜色
+		type: 2,// 烟花类型 'random'单色随机  'full_random'多色随机  1点  2长条  3闪点
+		color_child: 'inherit',//继承
+		type_child: 3,
+		boom_count: 10 // 同时最多显示个数
+	});
+	$(document).mousemove(function(e){ cx = e.pageX; cy = e.pageY; });	
+    $('body').on('click',function(){ $('body').firemaks('fire',cx,cy,50,clickColor,2,1.5); });
+    
+    var showIndex = 0;
+    $('.tags li').click(function () {
+        showIndex =  $(this).index();
+        $(this).addClass('active').siblings().removeClass('active');
+        // $('.page').eq(showIndex).addClass('show').siblings().removeClass('show');
+        $('.page').eq(showIndex).slideDown().siblings().hide();
+    })
+
+    var msg = ['Tel：135 2055 9717','Email：99835885@qq.com','Wechat：Dataoxiaocuo','QQ：9983 5885'];
+    $('.contact .icon').hover(function (){
+        var index = $(this).index();
+        $('.popup').show().text(msg[index]);
+    },function(){
+        $('.popup').hide();
+    })
+});
